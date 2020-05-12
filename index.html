@@ -18,9 +18,13 @@
 <body>
     <script src="./js/three/build/three.js"></script>
     <script src="./js/three/examples/js/controls/OrbitControls.js"></script>
+    <script src="./js/three/examples/js/loaders/GLTFLoader.js"></script>
     <script>
         var scene = new THREE.Scene();
 			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+            hlight = new THREE.AmbientLight(0x404040, 10);
+            scene.add(hlight);
 
 			var renderer = new THREE.WebGLRenderer();
 			renderer.setSize( window.innerWidth, window.innerHeight );
@@ -36,18 +40,23 @@
 
             controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-			var geometry = new THREE.BoxGeometry();
-			var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-			var cube = new THREE.Mesh( geometry, material );
-			scene.add( cube );
+			// var geometry = new THREE.BoxGeometry();
+			// var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+			// var cube = new THREE.Mesh( geometry, material );
+			// scene.add( cube );
+
+            var loader = new THREE.GLTFLoader();
+            loader.load('./meshes/lighthouse/scene.gltf', function(gltf) {
+                scene.add(gltf.scene);
+            })
 
 			camera.position.z = 5;
 
 			var animate = function () {
 				requestAnimationFrame( animate );
 
-				cube.rotation.x += 0.01;
-				cube.rotation.y += 0.01;
+				// cube.rotation.x += 0.01;
+				// cube.rotation.y += 0.01;
 
 				renderer.render( scene, camera );
 			};
