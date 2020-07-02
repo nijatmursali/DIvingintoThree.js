@@ -1,89 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three.js</title>
-
-    <style>
-        body {
-            margin: 0;
-        }
-        canvas {
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link href="css/style.css" rel="stylesheet">
+	<title>Around DIAG</title>
 </head>
+
 <body>
-    <script src="./js/three/build/three.js"></script>
-    <script src="./js/three/examples/js/controls/OrbitControls.js"></script>
-    <script src="./js/three/examples/js/loaders/GLTFLoader.js"></script>
-    <script>
-        var scene = new THREE.Scene();
-			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-            camera.rotation.y = 45/180*Math.PI;
-            camera.position.x = 800;
-            camera.position.y = 100;
-            camera.position.z = 1000;
+	<div id="mainDiv" style="z-index:1;">
+		<h1>
+			<span class="around">Around</span>
+			<span class="DIAG">DIAG</span>
+			<span class="madeFor">Made for Interactive Graphics Class</span>
+		</h1>
+		<div class="SceneEntries">
+			<div class="SceneEntry">
+				<label>Time</label>
+				<p id="time" class="time">36</p>
+			</div>
+			<div class="SceneEntry">
+				<label>Fuel</label>
+				<div class="status">
+					<div class="fill" id="fuel"></div>
+				</div>
+			</div>
+			<div class="SceneEntry">
+				<label>Record</label>
+				<p id="record" class="time">0</p>
+			</div>
+			<div class="SceneEntry">
+				<label>Score</label>
+				<p id="score" class="time">36</p>
+			</div>
+		</div>
+		<p class="buttonforInstructions">Try to collect fuels by WASD or arrow keys.</p>
+		<button type="button" class="btn btn-secondary" id="instructionbutton"></button>
+	</div>
+	<div id="WorldScene"></div>
 
-        
-            hlight = new THREE.AmbientLight (0x404040,100);
-            scene.add(hlight);
-            directionalLight = new THREE.DirectionalLight(0xffffff,100);
-            directionalLight.position.set(0,1,0);
-            directionalLight.castShadow = true;
-            scene.add(directionalLight);
-            light = new THREE.PointLight(0xc4c4c4,10);
-            light.position.set(0,300,500);
-            scene.add(light);
-            light2 = new THREE.PointLight(0xc4c4c4,10);
-            light2.position.set(500,100,0);
-            scene.add(light2);
-            light3 = new THREE.PointLight(0xc4c4c4,10);
-            light3.position.set(0,100,-500);
-            scene.add(light3);
-            light4 = new THREE.PointLight(0xc4c4c4,10);
-            light4.position.set(-500,300,500);
-            scene.add(light4);
+	<div class="centeredDiv">
+		<h1 id="gameover"></h1>
+	</div>
 
-            directionalLight = new THREE.DirectionalLight(0xffffff, 100);
-            directionalLight.position.set(0, 1, 0);
-            directionalLight.castShadow = true;
-            scene.add(directionalLight);
+	<div class="centeredDiv">
+		<h1 id="instructionText"></h1>
+	</div>
 
-			var renderer = new THREE.WebGLRenderer();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-			document.body.appendChild( renderer.domElement );
+	<div class="centeredDiv">
+		<h1 id="pausemenu"></h1>
 
-            window.addEventListener('resize', function( ){
-                var width = window.innerWidth;
-                var height = window.innerHeight;
-                renderer.setSize(width, height);
-                camera.aspect = width/height;
-                camera.updateProjectionMatrix();
-            });
-
-            controls = new THREE.OrbitControls(camera, renderer.domElement);
-
-            var loader = new THREE.GLTFLoader();
-            loader.load('./meshes/car/scene.gltf', function(gltf) {
-                car = gltf.scene.children[0];
-                car.scale.set(0.5,0.5,0.5);
-                scene.add(gltf.scene);
-                
-            })
-
-            camera.position.set( 500, 100, 1000 );
-            controls.update();
-
-			var animate = function () {
-				requestAnimationFrame( animate );
-                controls.update();
-				renderer.render( scene, camera );
-			};
-
-			animate();
-    </script>
+	</div>
 </body>
+<!-- ADD JAVASCRIPT ALL HERE -->
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+	crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+	crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+	crossorigin="anonymous"></script>
+<script src="js/stats.min.js"></script>
+<script type="text/javascript" src="js/three.min.js"></script>
+<script src="js/ours/scene.js"></script>
+<script src="js/ours/levels.js"></script>
+<script src="js/ours/loaders.js"></script>
+<script src="js/ours/models.js"></script>
+<script src="js/ours/collisions.js"></script>
+<script src="js/ours/main.js"></script>
+
 </html>
