@@ -12,7 +12,7 @@ You can read the documentation [here](https://github.com/SapienzaInteractiveGrap
 
 You can also start playing by cloning the repository and then just opening the index.html.
 ```sh
-$ git clone https://github.com/SapienzaInteractiveGraphicsCourse/final-project-successors.git
+$ git clone https://github.com/nijatmursali/DivingintoThree.js.git
 ```
 
 ### Components
